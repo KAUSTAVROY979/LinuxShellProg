@@ -1,10 +1,12 @@
 #include <iostream>
 #include <ctime>
+#include <unistd.h>
+#include <limits.h>
 using namespace std;
 void hello_World() {
 	cout << "Hello World From My New Console" << endl;
 }
-
+  
 void show_time() {
 	time_t tt;
 	time(&tt);
@@ -21,4 +23,13 @@ void show_date() {
 	tm* ld = localtime(&tt);
 	cout << "The Date is: " << ld->tm_mday << "/" << 1+ld->tm_mon << "/" << 1900+ld->tm_year;
 	cout << endl;
+}
+
+void show_cwd() {
+	char path[PATH_MAX];
+	char* result = getcwd(path, sizeof(path));
+	if (result) {
+		cout << "\033[34m" << path << "\033[0m$:";
+	}
+	else perror("getcwd() function error");
 }

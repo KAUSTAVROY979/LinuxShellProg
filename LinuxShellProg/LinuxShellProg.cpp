@@ -1,8 +1,7 @@
 ﻿#include "LinuxShellProg.h"
 //#include <conio.h>
 #include <csignal>
-#include <thread>
-#include <chrono>
+#include <limits.h>
 bool ShellRun=true;
 using namespace std;
 int main()
@@ -10,6 +9,7 @@ int main()
 	while (ShellRun) {
 		string s = "";
 		cout << "\033[32mMyShell#\033[0m ";
+		show_cwd();
 		cin >> s;
 		if (s == "quit" or s == "exit") {
 			cout << "\033[31mExiting The Console\033[0m" << endl;
