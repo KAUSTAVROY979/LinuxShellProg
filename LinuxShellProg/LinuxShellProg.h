@@ -4,10 +4,15 @@
 #pragma once
 
 #include <iostream>
-
+#include <ctime>
+#include <unistd.h>
+#include <limits.h>
+#include <iomanip>
+#include <string>
 // TODO: Reference additional headers your program requires here.
 void hello_World();
 void show_time();
 void show_date();
 void show_date();
 void show_cwd();
+void change_dir(std::string s);
