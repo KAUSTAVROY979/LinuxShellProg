@@ -21,6 +21,7 @@ int main()
 		else if (s == "clear") {
 			std::cout << "\033[2J\033[H";
 		}
+		else if (s == "ls") show_list();
 		else if (s[0] == 'c' and s[1] == 'd') change_dir(s);
 		else cout << s << ": Unknown Command" << endl;
 	}

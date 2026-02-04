@@ -52,5 +52,21 @@ void change_dir(string s) {
 		}
 		//dir.insert(0, 1, '/');
 	}
-	if (chdir(dir.c_str()) == -1) cout << "The path input is: " << dir << endl;
+	if (chdir(dir.c_str()) == -1) cout << dir << ": File ya Directory nahi hai" << endl;
+}
+
+void show_list() {
+	string currentPath = ".";
+	DIR* dir = opendir(currentPath.c_str());
+	if (!dir) {
+		perror("ls cannot access path");
+	}
+	dirent* entry;
+	while (entry = readdir(dir)) {
+		if (entry->d_type == DT_DIR) {
+			cout <<"\033[1;34m" << entry->d_name << "\033[0m" << "    ";
+		}
+		else cout << entry->d_name<<"    ";
+	}
+	cout << endl;
 }
