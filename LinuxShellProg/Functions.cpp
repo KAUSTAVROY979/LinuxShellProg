@@ -60,19 +60,25 @@ void show_list() {
 	DIR* dir = opendir(currentPath.c_str());
 	if (!dir) {
 		perror("ls cannot access path");
+		return;
 	}
-	dirent* entry;
-	while (entry = readdir(dir)) {
-		if (entry->d_type == DT_UNKNOWN) {
-			string fullpath = currentPath + '/'; +entry->d_name;
-			struct stat* info;
-			if(stat(fullpath.c_str(),info)) cout << "\033[1;34m" << entry->d_name << "\033[0m" << "    ";
+
+	struct dirent* entry;
+	while ((entry = readdir(dir)) != nullptr) {
+		string fullpath = currentPath + "/" + entry->d_name;
+		struct stat info;
+
+		if (lstat(fullpath.c_str(), &info) == -1) {
+			perror("lstat failed");
+			continue;
 		}
-		else if (entry->d_type == DT_DIR) {
-			cout <<"\033[1;34m" << entry->d_name << "\033[0m" << "    ";
-		}
-		else cout << entry->d_name<<"    ";
+		if (S_ISLNK(info.st_mode)) cout << "\033[1;36m" << entry->d_name << "\033[0m    ";
+		else if (S_ISDIR(info.st_mode)) cout << "\033[1;34m" << entry->d_name << "\033[0m    ";
+		else if (info.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) cout << "\033[1;32m" << entry->d_name << "*\033[0m    ";
+		else cout << entry->d_name << "    ";
 	}
+
 	cout << endl;
 	closedir(dir);
+
 }
