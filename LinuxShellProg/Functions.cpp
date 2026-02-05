@@ -63,10 +63,16 @@ void show_list() {
 	}
 	dirent* entry;
 	while (entry = readdir(dir)) {
-		if (entry->d_type == DT_DIR) {
+		if (entry->d_type == DT_UNKNOWN) {
+			string fullpath = currentPath + '/'; +entry->d_name;
+			struct stat* info;
+			if(stat(fullpath.c_str(),info)) cout << "\033[1;34m" << entry->d_name << "\033[0m" << "    ";
+		}
+		else if (entry->d_type == DT_DIR) {
 			cout <<"\033[1;34m" << entry->d_name << "\033[0m" << "    ";
 		}
 		else cout << entry->d_name<<"    ";
 	}
 	cout << endl;
+	closedir(dir);
 }

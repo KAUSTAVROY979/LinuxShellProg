@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <string>
 #include <dirent.h>
+#include <sys/stat.h>
 // TODO: Reference additional headers your program requires here.
 void hello_World();
 void show_time();
