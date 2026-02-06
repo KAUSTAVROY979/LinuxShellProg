@@ -77,8 +77,16 @@ void show_list() {
 		else if (info.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) cout << "\033[1;32m" << entry->d_name << "*\033[0m    ";
 		else cout << entry->d_name << "    ";
 	}
-
 	cout << endl;
 	closedir(dir);
+}
 
+void print_working_directory() {
+	char path[PATH_MAX];
+	char* result = getcwd(path, sizeof(path));
+	if (result) {
+		cout << "\033[1m" << path << "\033[0m";
+	}
+	else perror("getcwd() function error");
+	cout << endl;
 }

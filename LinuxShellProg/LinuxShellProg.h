@@ -19,3 +19,4 @@ void show_date();
 void show_cwd();
 void change_dir(std::string s); 
 void show_list();
+void print_working_directory();
