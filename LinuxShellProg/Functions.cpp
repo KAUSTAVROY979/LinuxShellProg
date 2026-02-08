@@ -92,7 +92,7 @@ void print_working_directory() {
 	else perror("getcwd() function error");
 	cout << endl;
 }
-void change_perm(string perm, string file) {
+void change_perm(string perm, string file) { // need to improve this function logic without using chmod system call.
 	if (perm.empty() or file.empty()) cout << "usage: chmod <perm> <file>";
 	else {
 		mode_t mode = strtol(perm.c_str(), nullptr, 8);
