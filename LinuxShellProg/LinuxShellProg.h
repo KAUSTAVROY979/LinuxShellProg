@@ -20,3 +20,4 @@ void show_cwd();
 void change_dir(std::string s); 
 void show_list();
 void print_working_directory();
+void change_perm(std::string perm, std::string file);

@@ -24,6 +24,12 @@ int main()
 		else if (s == "ls") show_list();
 		else if (s[0] == 'c' and s[1] == 'd') change_dir(s);
 		else if (s == "pwd") print_working_directory();
+		else if (s.substr(0, 5) == "chmod") {
+			stringstream ss(s);
+			string cmd, perm, file;
+			ss >> cmd >> perm >> file;
+			change_perm(perm, file);
+		}
 		else cout << s << ": Unknown Command" << endl;
 	}
 }

@@ -72,11 +72,13 @@ void show_list() {
 			perror("lstat failed");
 			continue;
 		}
-		if (S_ISLNK(info.st_mode)) cout << "\033[1;36m" << entry->d_name << "\033[0m    ";
-		else if (S_ISDIR(info.st_mode)) cout << "\033[1;34m" << entry->d_name << "\033[0m    ";
-		else if (info.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) cout << "\033[1;32m" << entry->d_name << "*\033[0m    ";
+		
+		if (S_ISLNK(info.st_mode)) cout << "\033[1;36m" << entry->d_name << "\033[0m	";
+		else if (S_ISDIR(info.st_mode)) cout << "\033[1;34m" << entry->d_name << "\033[0m	";
+		else if (info.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) cout << "\033[1;32m" << entry->d_name << "\033[0m	";
 		else cout << entry->d_name << "    ";
 	}
+	//cout << left << setw(10) << endl;
 	cout << endl;
 	closedir(dir);
 }
@@ -89,4 +91,12 @@ void print_working_directory() {
 	}
 	else perror("getcwd() function error");
 	cout << endl;
+}
+void change_perm(string perm, string file) {
+	if (perm.empty() or file.empty()) cout << "usage: chmod <perm> <file>";
+	else {
+		mode_t mode = strtol(perm.c_str(), nullptr, 8);
+		if (chmod(file.c_str(), mode) == -1) perror("chmod failed");
+		else cout << "Permissions of " << file << " changed to " << perm << endl;
+	}
 }
