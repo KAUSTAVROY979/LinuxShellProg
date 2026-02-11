@@ -11,6 +11,9 @@
 #include <string>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <fstream>
+#include <utime.h>
+using namespace std;
 // TODO: Reference additional headers your program requires here.
 void hello_World();
 void show_time();
@@ -21,3 +24,4 @@ void change_dir(std::string s);
 void show_list();
 void print_working_directory();
 void change_perm(std::string perm, std::string file);
+void run_touch(std::string file);

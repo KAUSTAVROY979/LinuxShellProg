@@ -1,4 +1,4 @@
-#include "LinuxShellProg.h"
+﻿#include "LinuxShellProg.h"
 using namespace std;
 
 string whiteSpace_remover(string s) {
@@ -98,5 +98,17 @@ void change_perm(string perm, string file) { // need to improve this function lo
 		mode_t mode = strtol(perm.c_str(), nullptr, 8);
 		if (chmod(file.c_str(), mode) == -1) perror("chmod failed");
 		else cout << "Permissions of " << file << " changed to " << perm << endl;
+	}
+}
+void run_touch(string filename){
+	struct stat finder;
+	if (stat(filename.c_str(), &finder) == 0) {
+		utime(filename.c_str(), nullptr);		// File exists 
+	}
+	else {
+		ofstream file(filename);				// File doesn’t exist 
+		if (!file) {
+			perror("touch failed");
+		}
 	}
 }

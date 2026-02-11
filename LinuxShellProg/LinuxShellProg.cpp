@@ -30,6 +30,14 @@ int main()
 			ss >> cmd >> perm >> file;
 			change_perm(perm, file);
 		}
+		else if (s.substr(0, 5) == "touch") {
+			stringstream ss(s);
+			string cmd, file;
+			ss >> cmd;
+			while (ss >> file) {
+				run_touch(file);
+			}
+		}
 		else cout << s << ": Unknown Command" << endl;
 	}
 }
