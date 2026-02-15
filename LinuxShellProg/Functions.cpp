@@ -112,3 +112,7 @@ void run_touch(string filename){
 		}
 	}
 }
+
+void run_rm(string filename) {
+	if (remove(filename.c_str()) != 0) perror("rm failed");
+}

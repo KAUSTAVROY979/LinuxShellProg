@@ -38,6 +38,14 @@ int main()
 				run_touch(file);
 			}
 		}
+		else if (s.substr(0, 2) == "rm") {
+			stringstream ss(s);
+			string cmd, file;
+			ss >> cmd;
+			while (ss >> file) {
+				run_rm(file);
+			}
+		}
 		else cout << s << ": Unknown Command" << endl;
 	}
 }
