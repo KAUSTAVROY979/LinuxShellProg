@@ -46,6 +46,15 @@ int main()
 				run_rm(file);
 			}
 		}
+
+		else if (s.substr(0, 5) == "mkdir") {
+			stringstream ss(s);
+			string cmd, file;
+			ss >> cmd;
+			while (ss >> file) {
+				run_mkdir(file);
+			}
+		}
 		else cout << s << ": Unknown Command" << endl;
 	}
 }

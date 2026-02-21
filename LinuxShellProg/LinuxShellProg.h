@@ -26,3 +26,4 @@ void print_working_directory();
 void change_perm(std::string perm, std::string file);
 void run_touch(std::string file);
 void run_rm(std::string file);
+void run_mkdir(std::string file);

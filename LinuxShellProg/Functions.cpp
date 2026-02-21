@@ -116,3 +116,7 @@ void run_touch(string filename){
 void run_rm(string filename) {
 	if (remove(filename.c_str()) != 0) perror("rm failed");
 }
+
+void run_mkdir(string dirname) {
+	if (mkdir(dirname.c_str(),0755) != 0) perror("mkdir failed");
+}
